@@ -32,7 +32,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.predator.springbootjournal.JsonDateSerializer;
+import com.predator.springbootjournal.utils.JsonDateSerializer;
 
 @Entity
 @Table(name="entry")
@@ -111,7 +111,7 @@ public class Journal {
         value.append(",Summary: ");
         value.append(summary);
         value.append(",Created: ");
-        value.append(getCreatedAsShort());
+        value.append(format.format(created));
         value.append(")");
 
         return value.toString();

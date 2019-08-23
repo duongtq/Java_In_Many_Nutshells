@@ -20,15 +20,11 @@
 package com.predator.springbootjournal.service;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.predator.springbootjournal.domain.Journal;
@@ -39,9 +35,9 @@ public class JournalService {
     private static final Logger log = LoggerFactory.getLogger(JournalService.class);
 
     @Autowired
-    JournalRepository journalRepository;
+    JournalRepository repo;
 
     public List<Journal> findAll() {
-        return journalRepository.findAll();
+        return repo.findAll();
     }
 }
