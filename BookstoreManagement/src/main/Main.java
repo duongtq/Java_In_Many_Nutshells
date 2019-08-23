@@ -17,31 +17,46 @@
  * under the License.                                           *
  ****************************************************************/
 
-package com.predator.springbootjournal.service;
+package main;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
+import dao.BookDAO;
+import implementation.BookDAOImplementation;
+import model.Book;
 
-import com.predator.springbootjournal.domain.Journal;
-import com.predator.springbootjournal.repository.JournalRepository;
+public class Main {
+    public static BookDAO bookDAO = new BookDAOImplementation();
 
-@Service
-public class JournalService {
-    private static final Logger log = LoggerFactory.getLogger(JournalService.class);
+    public static void main(String[] args) {
+        // List all books
+        System.out.println("Listing all books:");
+        findAllBooks();
+        System.out.println();
 
-    @Autowired
-    JournalRepository journalRepository;
+        // search book by keyword
+        // By book title
+        System.out.println("Search book by keyword in book title: Groovy");
+        searchBooks("Groovy");
+        System.out.println();
 
-    public List<Journal> findAll() {
-        return journalRepository.findAll();
+        // By author name
+        System.out.println("Search book by keyword in author's name: Josh");
+        searchBooks("Josh");
+        System.out.println();
+    }
+
+    private static void findAllBooks() {
+        List<Book> books = bookDAO.findAllBooks();
+        for (Book book : books) {
+            System.out.println(book);
+        }
+    }
+
+    private static void searchBooks(String keyWord) {
+        List<Book> books = bookDAO.searchBooksByKeyword(keyWord);
+        for (Book book : books) {
+            System.out.println(book);
+        }
     }
 }

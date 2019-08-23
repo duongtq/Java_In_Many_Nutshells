@@ -24,7 +24,6 @@ public class SpringBootJournalApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws ParseException {
 		log.info(">> Inserting data...");
-		service.insertData();
 		log.info(">> Find all data...");
 		service.findAll().forEach(entry -> log.info(entry.toString()));
 	}
